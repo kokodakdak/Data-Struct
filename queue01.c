@@ -56,7 +56,7 @@ element deQueue(LQueueType *LQ)
 {
 	QNode *old = LQ->front;
 	element item;
-	if (Empty(LQ))
+	if (LQ->front == NULL)
 	{
 		return -1;
 	}
@@ -67,9 +67,10 @@ element deQueue(LQueueType *LQ)
 		if (LQ->front == NULL)
 		{
 			LQ->back = NULL;
+		}
 			free(old);
 			return item;
-		}
+		
 	}
 }
 
@@ -116,10 +117,17 @@ int main()
 	int count = 0;
 	int queue[100000];
 	int n = 0;
-	int temp = 0;
 
 
-	scanf("%d", &num);
+	while (1)
+	{
+		scanf("%d", &num);
+		if (1 <= num <= 10000)
+		{
+			break;
+		}
+	}
+
 
 
 	for (i = 0; i < num; i++)
@@ -129,17 +137,28 @@ int main()
 		if (strcmp(str, "push") == 0)
 		{
 			scanf("%d", &data);
-			enQueue(LQ, data);
 			count++;
+			enQueue(LQ, data);
+			
 		
 		}
 
 		else if (strcmp(str, "pop") == 0)
 		{
-			deQueue(LQ);
-			queue[n] = Front(LQ);
-			n++;
-			count--;
+			if (count == 0)
+			{
+				queue[n] = -1;
+				n++;
+			}
+			else
+			{
+				count--;
+				queue[n] = Front(LQ);
+				deQueue(LQ);
+				n++;
+			}
+			
+			
 		}
 
 		else if (strcmp(str, "size") == 0)
@@ -177,12 +196,14 @@ int main()
 				n++;
 			}
 			else
+			{
 				queue[n] = Back(LQ);
-
+				n++;
+			}
 		}
 
 	}
-	temp = n;
+
 
 
 	for (i = 0; i < n; i++)

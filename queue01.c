@@ -131,8 +131,7 @@ int main()
 			scanf("%d", &data);
 			enQueue(LQ, data);
 			count++;
-			queue[n] = data;
-			n++;
+		
 		}
 
 		else if (strcmp(str, "pop") == 0)
@@ -186,9 +185,9 @@ int main()
 	temp = n;
 
 
-	for (i = 0; i <= num; i++)
+	for (i = 0; i < n; i++)
 	{
-		printf("%d\n", &queue[i]);
+		printf("%d\n", queue[i]);
 
 	}
 
